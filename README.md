@@ -1,2 +1,2 @@
-# dmeditor-remote-loader
+# dmeditor-loader
 DMEditor remote widget loader
