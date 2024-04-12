@@ -8,6 +8,7 @@ module.exports = merge(baseConfig, {
   cache: {
     type: 'filesystem',
   },
+  mode: 'development',
   entry: {
     main: path.resolve(__dirname, '../dev/index.tsx'),
   },
