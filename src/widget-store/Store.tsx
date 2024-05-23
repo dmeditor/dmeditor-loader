@@ -4,7 +4,11 @@ import { Widgets } from "./Widgets";
 
 const repos = [
   { name: "DM Editor", identifier: "_", url: "http://localhost:3002" },
-  { name: "Forte digital", identifier: "forte-digital", url: "" },
+  {
+    name: "Company name",
+    identifier: "company-name",
+    url: "http://localhost:3003",
+  },
 ];
 
 export const Store = () => {

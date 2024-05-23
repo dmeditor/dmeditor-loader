@@ -75,17 +75,28 @@ const Widget = (props: { data: any }) => {
 
 export const Widgets = (props: { repo: any }) => {
   const { identifier, name, url } = props.repo;
-  const [widgetList, setWidetList] = useState(widgetData);
+  const [widgetList, setWidetList] = useState([]);
+  const [error, setError] = useState("");
 
   const fetchWidgets = () => {
     if (!url) {
       return;
     }
-    fetch(url + "/dmeditor.json")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setWidetList([...data.widgets, ...widgetData]);
-      });
+    try {
+      fetch(url + "/dmeditor.json")
+        .catch((e) => {
+          throw "Failed to fetch repo url " + url;
+        })
+        .then((resp) => resp.json())
+        .catch((e) => {
+          throw "Didn't get json from repo url.";
+        })
+        .then((data) => {
+          setWidetList([...data.widgets, ...widgetData]);
+        });
+    } catch (e) {
+      window.alert(e);
+    }
   };
 
   useEffect(() => {
@@ -95,6 +106,7 @@ export const Widgets = (props: { repo: any }) => {
   return (
     <div>
       <Grid container spacing={2}>
+        {widgetList.length === 0 && <div>Loading...</div>}
         {widgetList.map((item) => (
           <Grid item xs={3}>
             <Widget data={item} />
