@@ -1,8 +1,16 @@
-// @ts-nocheck
+import * as React from "react";
+import {
+  DMEditor,
+  DMEditorView,
+  registerDefaultWidgets,
+  setDMEditorConfig,
+} from "dmeditor";
+import { nanoid } from "nanoid";
 
-import * as React from 'react';
-import { DMEditor, dmeServerSideLoad, setDMEditorCallback, setDMEditorConfig } from 'dmeditor';
-import { nanoid } from 'nanoid';
+// setRepositories([{ url: "http://localhost:3002", name: "no.company" }]);
+// loadWidgets();
+
+registerDefaultWidgets();
 
 setDMEditorConfig({
   general: {
@@ -11,8 +19,8 @@ setDMEditorConfig({
     },
     themes: [
       {
-        identifier: 'red',
-        name: 'Red',
+        identifier: "red",
+        name: "Red",
         cssStyle: `
         --project-main-color: red;
         --project-main-bg-color: #fbadad;
@@ -23,8 +31,8 @@ setDMEditorConfig({
       `,
       },
       {
-        identifier: 'blue',
-        name: 'Blue',
+        identifier: "blue",
+        name: "Blue",
         cssStyle: `
         --project-main-color: blue;
         --project-main-bg-color: #e0e0ff;
@@ -34,7 +42,7 @@ setDMEditorConfig({
     ],
   },
   widgets: {
-    heading: { defaultStyle: { _: 'big-space' } },
+    heading: { defaultStyle: { _: "big-space" } },
   },
 });
 
@@ -46,143 +54,143 @@ const App = () => {
   const data = [
     {
       id: `widget-${nanoid()}`,
-      style: { _: 'big-space' },
+      style: { _: "big-space" },
       data: {
-        value: 'This is a heading',
+        value: "This is a heading",
         level: 2,
         settings: {
-          align: 'left',
+          align: "left",
           // value: '',
         },
       },
-      type: 'heading',
+      type: "heading",
     },
     {
       id: `widget-${nanoid()}`,
-      style: { _: 'big-space' },
+      style: { _: "big-space" },
       data: {
-        value: 'This is a heading 2',
+        value: "This is a heading 2",
         level: 2,
         settings: {
-          align: 'left',
+          align: "left",
         },
       },
-      type: 'heading:gradient',
+      type: "heading:gradient",
     },
     {
       id: `widget-${nanoid()}`,
       data: {
-        value: 'This is a heading 2',
+        value: "This is a heading 2",
         level: 2,
         settings: {
-          align: 'right',
+          align: "right",
           // value: '',
         },
       },
-      type: 'heading',
+      type: "heading",
     },
     {
       id: `widget-${nanoid()}`,
       data: {
         columns: 3,
       },
-      type: 'grid',
+      type: "grid",
       children: [
         {
           id: `widget-${nanoid()}`,
           data: {
-            value: 'This is a heading 1 ',
+            value: "This is a heading 1 ",
             level: 2,
           },
-          type: 'heading',
+          type: "heading",
         },
         {
           id: `widget-${nanoid()}`,
           data: {
-            value: 'This is a heading 2',
+            value: "This is a heading 2",
             level: 2,
           },
-          type: 'heading',
+          type: "heading",
         },
         {
           id: `widget-${nanoid()}`,
-          type: 'list',
+          type: "list",
           data: {},
           children: [
             {
               id: `widget-${nanoid()}`,
               data: {
-                value: 'This is a heading 1 in List ',
+                value: "This is a heading 1 in List ",
                 level: 2,
               },
-              type: 'heading',
+              type: "heading",
             },
             {
               id: `widget-${nanoid()}`,
               data: {
-                value: 'This is a heading 2 in List',
+                value: "This is a heading 2 in List",
                 level: 2,
               },
-              type: 'heading',
+              type: "heading",
             },
             {
               id: `widget-${nanoid()}`,
               data: {
-                value: 'This is a heading 3 in List',
+                value: "This is a heading 3 in List",
                 level: 2,
               },
-              type: 'heading',
+              type: "heading",
             },
           ],
         },
         {
           id: `widget-${nanoid()}`,
           data: {
-            value: 'This is a heading 3',
+            value: "This is a heading 3",
             level: 2,
           },
-          type: 'heading',
+          type: "heading",
         },
       ],
     },
     {
       id: `widget-${nanoid()}`,
       data: {
-        value: 'This is a heading 3',
+        value: "This is a heading 3",
         level: 2,
       },
-      type: 'heading:gradient',
+      type: "heading:gradient",
     },
     {
       id: `widget-${nanoid()}`,
-      type: 'list',
+      type: "list",
       data: {
-        direction: 'horizontal',
+        direction: "horizontal",
       },
       children: [
         {
           id: `widget-${nanoid()}`,
           data: {
-            value: 'This is a heading 1 in List ',
+            value: "This is a heading 1 in List ",
             level: 2,
           },
-          type: 'heading',
+          type: "heading",
         },
         {
           id: `widget-${nanoid()}`,
           data: {
-            value: 'This is a heading 2 in List',
+            value: "This is a heading 2 in List",
             level: 2,
           },
-          type: 'heading',
+          type: "heading",
         },
         {
           id: `widget-${nanoid()}`,
           data: {
-            value: 'This is a heading 3 in List',
+            value: "This is a heading 3 in List",
             level: 2,
           },
-          type: 'heading',
+          type: "heading",
         },
       ],
     },
@@ -191,23 +199,35 @@ const App = () => {
     // editorRef.current.setDesingerJson(jsonString(data))
     editorRef.current?.setEditorJson(data);
     editorRef.current?.setPageSettings([
-      { identifier: 'cover_image', name: 'Cover image', type: 'image' },
-      { identifier: 'summary', name: 'Summary', type: 'richtext' },
-      { identifier: 'meta_key', name: 'Meta key', type: 'text' },
-      { identifier: 'meta_description', name: 'Meta description', type: 'multitext' },
+      { identifier: "cover_image", name: "Cover image", type: "image" },
+      { identifier: "summary", name: "Summary", type: "richtext" },
+      { identifier: "meta_key", name: "Meta key", type: "text" },
+      {
+        identifier: "meta_description",
+        name: "Meta description",
+        type: "multitext",
+      },
     ]);
-    editorRef.current?.setPageData({ title: 'New page', theme: 'red', meta_key: 'test key' });
+    editorRef.current?.setPageData({
+      title: "New page",
+      theme: "red",
+      meta_key: "test key",
+    });
     editorRef.current?.onSave((data) => {
-      window.alert('Saved');
+      window.alert("Saved");
     });
   }, []);
 
-  dmeServerSideLoad(data, null).then((d) => {
-    console.log(d);
-  });
+  // dmeServerSideLoad(data, null).then((d) => {
+  //   console.log(d);
+  // });
 
-  return <DMEditor ref={editorRef} />;
-  // return <DMEditorView data={data} theme="blue" />;
+  return (
+    <div>
+      <DMEditor ref={editorRef} />
+    </div>
+  );
+  return <DMEditorView data={data} theme="blue" />;
 };
 
 export default App;
