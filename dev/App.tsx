@@ -2,14 +2,13 @@ import * as React from "react";
 import {
   DMEditor,
   DMEditorView,
+  initLanguage,
   registerDefaultWidgets,
   setDMEditorConfig,
 } from "dmeditor";
 import { nanoid } from "nanoid";
 
-// setRepositories([{ url: "http://localhost:3002", name: "no.company" }]);
-// loadWidgets();
-
+initLanguage("nor-NO");
 registerDefaultWidgets();
 
 setDMEditorConfig({
@@ -227,7 +226,7 @@ const App = () => {
       <DMEditor ref={editorRef} />
     </div>
   );
-  return <DMEditorView data={data} theme="blue" />;
+  // return <DMEditorView data={data} theme="blue" />;
 };
 
 export default App;
