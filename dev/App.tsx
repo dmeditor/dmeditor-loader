@@ -22,6 +22,7 @@ new RemoteLoaderPlugin(dmeditor, [
 ])
   .loadWidgets()
   .then(() => {
+    console.log("Remote widget loaded");
     // renderApp();
   });
 
