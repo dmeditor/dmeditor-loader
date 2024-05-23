@@ -1,6 +1,7 @@
 import { Button, Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 
-const widgetLists = [
+const widgetData = [
   {
     name: "Carousel",
     image:
@@ -51,7 +52,15 @@ const Widget = (props: { data: any }) => {
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <img src={image} style={{ width: 200 }} />
+        <img
+          src={image}
+          style={{
+            width: 200,
+            maxHeight: 200,
+            border: "1px solid #f0f0f0",
+            borderRadius: 3,
+          }}
+        />
       </div>
       <h3 style={{ fontSize: 16 }}>{name}</h3>
       <div style={{ fontSize: 13 }}>{summary}</div>
@@ -64,13 +73,31 @@ const Widget = (props: { data: any }) => {
   );
 };
 
-export const Widgets = () => {
+export const Widgets = (props: { repo: any }) => {
+  const { identifier, name, url } = props.repo;
+  const [widgetList, setWidetList] = useState(widgetData);
+
+  const fetchWidgets = () => {
+    if (!url) {
+      return;
+    }
+    fetch(url + "/dmeditor.json")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setWidetList([...data.widgets, ...widgetData]);
+      });
+  };
+
+  useEffect(() => {
+    fetchWidgets();
+  }, []);
+
   return (
     <div>
       <Grid container spacing={2}>
-        {widgetLists.map((widgetData) => (
+        {widgetList.map((item) => (
           <Grid item xs={3}>
-            <Widget data={widgetData} />
+            <Widget data={item} />
           </Grid>
         ))}
       </Grid>
