@@ -2,10 +2,19 @@ import * as React from "react";
 import { DMEditor } from "dmeditor";
 import { nanoid } from "nanoid";
 import "./initDMEditor";
-
-const { useRef, useEffect } = React;
+import { useState, useRef, useEffect } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+} from "@mui/material";
+import { Store } from "../src/widget-store";
 
 const App = () => {
+  const [storeShown, setStoreShown] = useState(true);
   const editorRef = useRef(null);
   // const [editor] = useEditor()
   const data = [
@@ -152,6 +161,7 @@ const App = () => {
       ],
     },
   ];
+
   useEffect(() => {
     // editorRef.current.setDesingerJson(jsonString(data))
     editorRef.current?.setEditorJson(data);
@@ -181,6 +191,46 @@ const App = () => {
 
   return (
     <div>
+      <div
+        style={{
+          position: "absolute",
+          right: "30%",
+          top: 0,
+          zIndex: 1000,
+          padding: 10,
+        }}
+      >
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setStoreShown(true);
+          }}
+          style={{ color: "white", textDecoration: "none", padding: 5 }}
+        >
+          Store
+        </a>
+      </div>
+      <Dialog open={storeShown} maxWidth="lg">
+        <DialogTitle>DM Editor Store</DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={() => {
+            setStoreShown(false);
+          }}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          X
+        </IconButton>
+        <DialogContent>
+          <Store />
+        </DialogContent>
+      </Dialog>
       <DMEditor ref={editorRef} />
     </div>
   );
