@@ -7,9 +7,23 @@ import {
   setDMEditorConfig,
 } from "dmeditor";
 import { nanoid } from "nanoid";
+import { RemoteLoaderPlugin } from "../src";
+import * as dmeditor from "dmeditor";
 
 initLanguage("nor-NO");
 registerDefaultWidgets();
+
+//load remote widget asynchronically
+new RemoteLoaderPlugin(dmeditor, [
+  {
+    name: "remote2",
+    url: "http://localhost:3002",
+  },
+])
+  .loadWidgets()
+  .then(() => {
+    // renderApp();
+  });
 
 setDMEditorConfig({
   general: {

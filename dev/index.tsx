@@ -1,23 +1,11 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import * as dmeditor from 'dmeditor';
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-import App from './App';
-import { RemoteLoaderPlugin } from '../src/index';
-
-new RemoteLoaderPlugin(dmeditor, [
-  {
-    name: 'remote2',
-    url: 'http://localhost:3002',
-  },
-])
-  .loadWidgets()
-  .then(() => {
-    renderApp();
-  });
+import App from "./App";
+import { RemoteLoaderPlugin } from "../src/index";
 
 const renderApp = () => {
-  const $el = document.getElementById('dmeditor');
+  const $el = document.getElementById("dmeditor");
   const app = (
     <React.StrictMode>
       <App />
@@ -26,4 +14,6 @@ const renderApp = () => {
   createRoot($el!).render(app);
 };
 
-export default renderApp;
+renderApp();
+
+// export default renderApp;
